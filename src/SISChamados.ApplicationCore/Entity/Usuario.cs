@@ -11,7 +11,7 @@ namespace SISChamados.ApplicationCore.Entity
 
         }
 
-        public int IdUsuario { get; set; }
+        public int UsuarioID { get; set; }
 
         public string NomeUsuario { get; set; }
 

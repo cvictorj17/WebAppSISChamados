@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SISChamados.UI.Web.Data;
 using SISChamados.UI.Web.Models;
 using SISChamados.UI.Web.Services;
+using SISChamados.InfraStructure.Data;
 
 namespace SISChamados.UI.Web
 {
@@ -32,6 +33,9 @@ namespace SISChamados.UI.Web
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddDbContext<UsuarioContexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
