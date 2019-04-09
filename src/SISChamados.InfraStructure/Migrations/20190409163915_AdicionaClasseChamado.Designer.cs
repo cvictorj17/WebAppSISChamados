@@ -11,8 +11,8 @@ using System;
 namespace SISChamados.InfraStructure.Migrations
 {
     [DbContext(typeof(ChamadoContexto))]
-    [Migration("20190409145418_Inicial")]
-    partial class Inicial
+    [Migration("20190409163915_AdicionaClasseChamado")]
+    partial class AdicionaClasseChamado
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,28 @@ namespace SISChamados.InfraStructure.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("SISChamados.ApplicationCore.Entity.Chamado", b =>
+                {
+                    b.Property<int>("ChamadoID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Descricao");
+
+                    b.Property<DateTime>("DtFim");
+
+                    b.Property<DateTime>("DtInicio");
+
+                    b.Property<string>("Solucao");
+
+                    b.Property<int>("UsuarioID");
+
+                    b.HasKey("ChamadoID");
+
+                    b.HasIndex("UsuarioID");
+
+                    b.ToTable("TbChamado");
+                });
 
             modelBuilder.Entity("SISChamados.ApplicationCore.Entity.Usuario", b =>
                 {
@@ -37,6 +59,14 @@ namespace SISChamados.InfraStructure.Migrations
                     b.HasKey("UsuarioID");
 
                     b.ToTable("TbUsuario");
+                });
+
+            modelBuilder.Entity("SISChamados.ApplicationCore.Entity.Chamado", b =>
+                {
+                    b.HasOne("SISChamados.ApplicationCore.Entity.Usuario", "Usuario")
+                        .WithMany("Chamados")
+                        .HasForeignKey("UsuarioID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

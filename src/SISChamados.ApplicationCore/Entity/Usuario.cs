@@ -21,5 +21,6 @@ namespace SISChamados.ApplicationCore.Entity
 
         public string Telefone { get; set; }
 
+        public ICollection<Chamado> Chamados { get; set; }
     }
 }

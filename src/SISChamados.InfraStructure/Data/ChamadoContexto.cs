@@ -6,18 +6,20 @@ using SISChamados.ApplicationCore.Entity;
 
 namespace SISChamados.InfraStructure.Data
 {
-    public class UsuarioContexto : DbContext
+    public class ChamadoContexto : DbContext
     {
-        public UsuarioContexto(DbContextOptions<UsuarioContexto> options) : base(options)
+        public ChamadoContexto(DbContextOptions<ChamadoContexto> options) : base(options)
         {
 
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Chamado> Chamados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().ToTable("TbUsuario");
+            modelBuilder.Entity<Chamado>().ToTable("TbChamado");
         }
     }
 }
